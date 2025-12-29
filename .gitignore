@@ -1,3 +1,6 @@
+# Ignore Playwright credentials and storage state
+testdata/credentials.json
+storageState.json
 
 # Playwright
 node_modules/
@@ -6,3 +9,7 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+/keys.env
+.env
+# Ignore filter-repo helper files
+/replacements.txt

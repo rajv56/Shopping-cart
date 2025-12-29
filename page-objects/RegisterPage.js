@@ -1,21 +1,22 @@
+import { faker } from '@faker-js/faker';
+
 export class RegisterPage {
     constructor(page) {
         this.page = page
 
-        this.emailInput = page.getByPlaceholder('e-mail')
-        this.passwordInput = page.getByPlaceholder('password')
+        this.emailLocator = page.getByPlaceholder('e-mail')
+        this.passwordLocator = page.getByPlaceholder('password')
         this.registerButton = page.getByRole('button', { name: 'register' })
     }
 
-    //signUpAsNewUser = async () => {
-      signUpAsNewUser = async (email, password) => {
-              //await this.page.pause()
-        // type into email input
-        await this.emailInput.fill(email)
-        await this.passwordInput.fill(password)
-        // click register button
+    signUpAsNewUser = async () => {
+        // type into email and password using faker 
+        const emailValue = faker.internet.email();
+        const passwordValue = faker.internet.password();
+        console.log('email value from faker  : ' + emailValue + 'password value from faker' + passwordValue);
+        await this.emailLocator.fill(emailValue);
+        await this.passwordLocator.fill(passwordValue)
         await this.registerButton.waitFor()
         await this.registerButton.click()
-        //await this.page.pause()
-    }
+           }
 }
