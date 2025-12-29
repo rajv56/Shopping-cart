@@ -1,8 +1,10 @@
-export class DeliveryDetails {
+//import { passengerData } from '../testData/passengerData'
+import { faker } from '@faker-js/faker'
+ export class DeliveryDetails {
     constructor(page) {
         this.page = page
 
-        this.firstNameInput = page.locator('.delivery-first-name')
+        this.firstNameInput = page.locator('[data-qa="delivery-first-name"]')
         this.lastNameInput = page.locator('[data-qa="delivery-last-name"]')
         this.streetInput = page.locator('[data-qa="delivery-address-street"]')
         this.postcodeInput = page.locator('[data-qa="delivery-postcode"]')
@@ -13,15 +15,18 @@ export class DeliveryDetails {
     }
 
     fillDetails = async () => {
-        await this.firstNameInput.fill("Tester")
-        await this.lastNameInput.waitFor()
-        await this.lastNameInput.fill("McTest")
-        await this.streetInput.waitFor()
-        await this.streetInput.fill("Rue de la fontaine")
-        await this.postcodeInput.waitFor()
-        await this.postcodeInput.fill("90210")
-        await this.cityInput.waitFor()
-        await this.cityInput.fill("Beverly Hills")
+
+        const firstName = faker.person.firstName();
+        const lastName = faker.person.lastName();
+        const street = faker.location.streetAddress();
+        const postalCode = faker.location.zipCode();
+        const city = faker.location.city();
+
+        await this.firstNameInput.fill(firstName)
+        await this.lastNameInput.fill(lastName)
+        await this.streetInput.fill(street)
+        await this.postcodeInput.fill(postalCode)
+        await this.cityInput.fill(city)
         await this.countryDropdown.waitFor()
         await this.countryDropdown.selectOption("United States of America")
         

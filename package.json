@@ -3,15 +3,25 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.3"
+    "@types/node": "^25.0.3",
+    "cspell": "^9.4.0",
+    "eslint": "^9.39.2",
+    "globals": "^16.5.0"
   },
   "dependencies": {
-    "@faker-js/faker": "^10.1.0"
+    "@faker-js/faker": "^10.1.0",
+    "dotenv": "^17.2.3"
+  },
+  "type": "module",
+  "scripts": {
+    "eslint": "eslint .",
+    "test:report": "npx playwright test --reporter=html && node sendReportToSlack.js",
+    "spellcheck": "cspell \"**/*.{js,ts,md}\""
   }
 }
