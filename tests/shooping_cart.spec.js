@@ -6,7 +6,7 @@ import { LoginPage } from "../page-objects/LoginPage.js"
 import { RegisterPage } from "../page-objects/RegisterPage.js"
 //import { MyAccount } from "../page-objects/MyAccount.js"
 import { DeliveryDetails } from "./../page-objects/DeliveryDetails.js"
-test.only("New user full end-to-end test journey", async ({ page }) => {
+test("New user full end-to-end test journey", async ({ page }) => {
     const productsPage = new ProductsPage(page);
     await productsPage.visit();
     await productsPage.addProductToBasket(0);
@@ -16,7 +16,7 @@ test.only("New user full end-to-end test journey", async ({ page }) => {
     const navigation = new Navigation(page);
     navigation.getBasketCount;
     await navigation.goToCheckout();
-  
+
     const checkout = new Checkout(page);
     await checkout.removeCheapestProduct();
     await checkout.continueToCheckout();
@@ -29,5 +29,18 @@ test.only("New user full end-to-end test journey", async ({ page }) => {
     const deliveryDetails = new DeliveryDetails(page)
     await deliveryDetails.fillDetails()
     await deliveryDetails.continueToPaymentButton.click();
+
+})
+
+test.only('Choose random product', async ({ page }) => {
+    const productsPage = new ProductsPage(page);
+    await productsPage.visit();
+    const count = await productsPage.addButtons.count();
+    console.log("no of products available" + count)
+    const randomIndex = Math.floor(Math.random() * count);
+    console.log("the random product choosen to click "+randomIndex);
+    const randomProduct = await productsPage.addButtons.nth(randomIndex).click();
+    await page.pause();
+
 
 })
